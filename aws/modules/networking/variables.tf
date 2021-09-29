@@ -11,7 +11,7 @@ variable "private_subnets_cidr" {
 }
 
 variable "availability_zones" {
-  type = string
+  type = list(string)
 }
 
 variable "destination_cidr_block" {

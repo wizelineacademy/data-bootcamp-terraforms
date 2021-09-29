@@ -12,6 +12,10 @@ private_subnets_cidr = [
     "10.0.5.0/24",
     "10.0.6.0/24"]
 
-availability_zones = "us-east-2"
+availability_zones = [
+    "us-east-2a",
+    "us-east-2b",
+    "us-east-2c"]
+
 
 destination_cidr_block = "0.0.0.0/0"
