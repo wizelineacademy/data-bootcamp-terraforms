@@ -21,17 +21,17 @@ variable "public_subnet_name" {
 variable "private_subnets" {
   description = "Private Subnets IP addresses"
   type        = list(string)
-  default     = [
+  default = [
     "10.0.1.0/24",
     "10.0.2.0/24",
-    "10.0.3.0/24"]
+  "10.0.3.0/24"]
 }
 
 variable "public_subnets" {
   description = "Public Subnets IP addresses"
   type        = list(string)
-  default     = [
+  default = [
     "10.0.4.0/24",
     "10.0.5.0/24",
-    "10.0.6.0/24"]
+  "10.0.6.0/24"]
 }
