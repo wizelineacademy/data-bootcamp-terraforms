@@ -19,3 +19,5 @@ availability_zones = [
 
 
 destination_cidr_block = "0.0.0.0/0"
+
+cluster_name = "airflow-eks"

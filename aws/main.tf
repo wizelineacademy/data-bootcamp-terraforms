@@ -11,9 +11,16 @@ module "networking" {
 module "eks" {
   source = "./modules/eks"
   
-  region        = var.region
-  cluster_name  = var.cluster_name
-  vpc_id        = module.vpc.vpc_id
-  subnets       = module.vpc.private_subnets
+  region          = var.region
+  cluster_name    = var.cluster_name
+  cluster_version = "1.20"
+  vpc_id          = module.networking.vpc_id
+  subnets         = module.networking.private_subnets_ids
+
+  instance_type_group1        = "t2.small"
+  instance_type_group2        = "t2.medium"
+  asg_desired_capacity_group1 = 2
+  asg_desired_capacity_group2 = 1
+
   
 }

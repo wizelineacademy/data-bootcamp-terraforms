@@ -22,3 +22,8 @@ variable "destination_cidr_block" {
   type = string
   default = "0.0.0.0/0"
 }
+
+variable "cluster_name" {
+  description = "The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module."
+  type        = string
+}
