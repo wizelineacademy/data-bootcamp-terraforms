@@ -37,3 +37,24 @@ module "ec2" {
   ec2_instance_type = var.ec2_instance_type
   ec2_ssh_key_name = var.ec2_ssh_public_key_path
 }
+
+module "rds" {
+  source = "./modules/rds"
+  private_subnet = module.networking.private_subnets_cidr
+  allocated_storage = var.allocated_storage
+  db_engine = var.db_engine
+  engine_version = var.engine_version
+  instance_type = var.instance_type
+  database_name = var.database_name
+  db_username = var.db_username
+  db_password = var.db_password
+  service_sg = var.service_sg
+  publicly_accessible = var.publicly_accessible
+}
+
+module "s3" {
+  source = "./modules/s3"
+  buckebucket_prefix = var.buckebucket_prefix
+  acl = var.acl
+  versioning = var.versioning
+}
