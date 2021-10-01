@@ -25,3 +25,6 @@ ec2_instance_type = "t2.micro" # Free Tier eligible
 ec2_ssh_key_name  = "bastion-host-key"
 
 ec2_ssh_public_key_path = "insert your path"
+
+### EKS ###
+cluster_name = "airflow-eks"

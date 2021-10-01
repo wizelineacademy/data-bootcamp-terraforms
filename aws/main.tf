@@ -1,3 +1,4 @@
+
 module "networking" {
   source                 = "./modules/networking"
   vpc_cidr               = var.vpc_cidr
@@ -7,6 +8,23 @@ module "networking" {
   destination_cidr_block = var.destination_cidr_block
 }
 
+
+module "eks" {
+  source = "./modules/eks"
+  
+  region          = var.region
+  cluster_name    = var.cluster_name
+  cluster_version = "1.20"
+  vpc_id          = module.networking.vpc_id
+  subnets         = module.networking.private_subnets_ids
+
+  instance_type_group1        = "t2.small"
+  instance_type_group2        = "t2.medium"
+  asg_desired_capacity_group1 = 2
+  asg_desired_capacity_group2 = 1
+
+  
+}
 module "ec2" {
   source = "./modules/ec2"
   subnet_id = module.networking.private_subnets_ids
