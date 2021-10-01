@@ -17,9 +17,9 @@ variable "vpc_id" {
   description = "VPC where the cluster and workers will be deployed."
 }
 
-variable "subnets" {
-  type = list(string)
-  description = "A list of subnets to place the EKS cluster and workers within."
+variable "subnet" {
+  type = string
+  description = "The private subnet to place the EKS cluster and workers within."
 }
 
 variable "instance_type_group1" {
