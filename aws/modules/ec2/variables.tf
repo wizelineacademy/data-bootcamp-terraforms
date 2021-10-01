@@ -1,8 +1,3 @@
-variable "instance_count" {
-  description = "Number of EC2 to be created"
-  type        = bool
-}
-
 variable "ec2_name" {
   description = "The Name of the EC2"
   type        = string
