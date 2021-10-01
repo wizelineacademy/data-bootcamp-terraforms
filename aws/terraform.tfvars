@@ -7,6 +7,19 @@ public_subnets_cidr = "10.0.1.0/24"
 
 private_subnets_cidr = "10.0.2.0/24"
 
+#### EKS variables ####
+cluster_name = "airflow-eks-data-bootcamp"
+
+cluster_version = "1.20"
+
+instance_type_group1 = "t2.small"
+
+instance_type_group2 = "t2.medium"
+
+asg_desired_capacity_group1 = 2
+
+asg_desired_capacity_group2 = 1
+
 #### EC2 variables ####
 ec2_name = "Bastion Host"
 
@@ -18,12 +31,10 @@ ec2_ami = "ami-00dfe2c7ce89a450b" # Amazon Linux 2 AMI (64-bit x86)  Free Tier e
 
 ec2_instance_type = "t2.micro" # Free Tier eligible
 
-ec2_ssh_key_name  = "bastion-host-key"
+ec2_ssh_key_name = "bastion-host-key"
 
 ec2_ssh_public_key_path = "insert your path"
 
-### EKS ###
-cluster_name = "airflow-eks"
 
 #### RDS ####
 allocated_storage = ""
@@ -41,7 +52,7 @@ db_username = ""
 db_password = ""
 
 #### S3 variables ####
-buckebucket_prefix  = "s3-Data-bootcamp-"
+buckebucket_prefix = "s3-Data-bootcamp-"
 
 acl = "private"
 
