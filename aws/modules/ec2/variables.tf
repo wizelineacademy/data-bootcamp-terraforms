@@ -23,13 +23,8 @@ variable "ec2_instance_type" {
   type        = string
 }
 
-variable "vpc_id" {
+variable "vpc_id_ec2" {
   description = "The ID of the VPC"
-  type        = string
-}
-
-variable "public_subnet_id" {
-  description = "The ID of the Public Subnet"
   type        = string
 }
 
@@ -44,6 +39,6 @@ variable "ec2_ssh_public_key_path" {
 }
 
 variable "subnet_id" {
-  description = ""
+  description = "carlos"
   type        = string
 }

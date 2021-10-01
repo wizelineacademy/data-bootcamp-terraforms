@@ -2,7 +2,7 @@ module "eks" {
   source          = "terraform-aws-modules/eks/aws"
   cluster_name    = var.cluster_name
   cluster_version = var.cluster_version
-  subnet         = var.subnet
+  subnets         = [var.subnet]
 
   tags = {
     Environment = "data-bootcamp"
@@ -10,7 +10,7 @@ module "eks" {
     GithubOrg   = "terraform-aws-modules"
   }
 
-  vpc_id = var.vpc_id
+  vpc_id = var.vpc_id_eks
 
   workers_group_defaults = {
     root_volume_type = "gp2"

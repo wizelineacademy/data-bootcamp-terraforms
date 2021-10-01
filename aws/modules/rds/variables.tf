@@ -20,7 +20,7 @@ variable "db_username" {
 variable "db_password" {
   description = "Password credentials for root user"
 }
-variable "private_subnet" {
+variable "subnet_rds" {
   description = "Private subnet where the rds instance is going to be placed"
 }
 variable "service_sg" {
@@ -28,4 +28,8 @@ variable "service_sg" {
 }
 variable "publicly_accessible" {
   description = "Variable that set the instance to be accessible publicly"
+}
+
+variable "vpc_id_rds" {
+  description = "VPC id"
 }

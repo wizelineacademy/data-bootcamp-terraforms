@@ -11,8 +11,7 @@ module "networking" {
 module "eks" {
   source = "./modules/eks"
 
-  region = var.region
-  vpc_id = module.networking.vpc_id
+  vpc_id_eks = module.networking.vpc_id
   subnet = module.networking.private_subnets_ids
 
   cluster_name    = var.cluster_name
@@ -26,24 +25,23 @@ module "eks" {
 module "ec2" {
   source = "./modules/ec2"
 
-  region    = var.region
-  vpc_id    = module.networking.vpc_id
-  subnet_id = module.networking.private_subnets_ids
+  vpc_id_ec2                     = module.networking.vpc_id
+  subnet_id                      = module.networking.public_subnets_ids
 
   ec2_name                       = var.ec2_name
   ec2_security_group_name        = var.ec2_security_group_name
   ec2_security_group_description = var.ec2_security_group_description
   ec2_ami                        = var.ec2_ami
   ec2_instance_type              = var.ec2_instance_type
-  ec2_ssh_key_name               = var.ec2_ssh_public_key_path
+  ec2_ssh_key_name               = var.ec2_ssh_key_name
+  ec2_ssh_public_key_path        = var.ec2_ssh_public_key_path
 }
 
 module "rds" {
   source = "./modules/rds"
 
-  region         = var.region
-  vpc_id         = module.networking.vpc_id
-  private_subnet = module.networking.private_subnets_ids
+  vpc_id_rds        = module.networking.vpc_id
+  subnet_rds        = module.networking.private_subnets_ids
 
   allocated_storage   = var.allocated_storage
   db_engine           = var.db_engine
@@ -59,7 +57,10 @@ module "rds" {
 module "s3" {
   source = "./modules/s3"
 
-  buckebucket_prefix = var.buckebucket_prefix
-  acl                = var.acl
-  versioning         = var.versioning
+  vpc_id_s3   = module.networking.vpc_id
+  subnet_s3 = module.networking.private_subnets_ids
+
+  bucket_prefix = var.bucket_prefix
+  acl           = var.acl
+  versioning    = var.versioning
 }

@@ -17,7 +17,7 @@ resource "aws_security_group" "ec2_security_group" {
   name        = var.ec2_security_group_name
   description = var.ec2_security_group_description
 
-  vpc_id      = var.vpc_id
+  vpc_id      = var.vpc_id_ec2
 
   ingress {
     from_port   = 22
