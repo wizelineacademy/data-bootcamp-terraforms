@@ -9,6 +9,11 @@ variable "public_subnets_cidr" {
 }
 
 variable "private_subnets_cidr" {
-  type = string
+  type = list(string)
   description = "IP Ranges for the Private Subnet"
+}
+
+variable "availability_zone" {
+  type = list(string)
+  description = "AZ for Private Subnets"
 }
