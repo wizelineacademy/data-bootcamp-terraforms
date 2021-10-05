@@ -3,21 +3,27 @@ variable "region" {
 }
 
 ### Networking ###
-
 variable "vpc_cidr" {
-  type = string
+  type        = string
+  description = "IP Ranges for the VPC"
 }
 
 variable "public_subnets_cidr" {
-  type = string
+  type        = string
+  description = "IP Ranges for the Public Subnet"
 }
 
 variable "private_subnets_cidr" {
-  type = string
+  type        = list(string)
+  description = "IP Ranges for the Private Subnet"
+}
+
+variable "availability_zone" {
+  type = list(string)
+  description = "AZ for Private Subnets"
 }
 
 ### RDS ###
-
 variable "allocated_storage" {
   description = "Space in disk for the database, stay in the range 5-10 to stay in free tier"
 }
@@ -39,9 +45,6 @@ variable "db_username" {
 variable "db_password" {
   description = "Password credentials for root user"
 }
-variable "private_subnet" {
-  description = "Private subnet where the rds instance is going to be placed"
-}
 variable "service_sg" {
   description = "Security group of the service which is going to connect to the database"
 }
@@ -50,7 +53,6 @@ variable "publicly_accessible" {
 }
 
 ### EC2 ###
-
 variable "ec2_name" {
   description = "The Name of the EC2"
   type        = string
@@ -76,16 +78,6 @@ variable "ec2_instance_type" {
   type        = string
 }
 
-variable "vpc_id" {
-  description = "The ID of the VPC"
-  type        = string
-}
-
-variable "public_subnet_id" {
-  description = "The ID of the Public Subnet"
-  type        = string
-}
-
 variable "ec2_ssh_key_name" {
   description = "The SSH Key Name"
   type        = string
@@ -96,34 +88,24 @@ variable "ec2_ssh_public_key_path" {
   type        = string
 }
 
-variable "subnet_id" {
-  description = ""
-  type        = string
-}
-
-variable "cluster_name" {
-  description = "The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module."
-  type        = string
-}
 
 ### S3 ###
 variable "bucket_prefix" {
-  type = string
+  description = "A prefix will be added to a random name"
+  type        = string
 }
 
 variable "acl" {
-  type = string
+  description = "Access Control List"
+  type        = string
 }
 
 variable "versioning" {
-  type = bool
+  description = "Version of the stored object"
+  type        = bool
 }
 
 ### eks ###
-variable "region" {
-  default     = "us-west-2"
-  description = "AWS region"
-}
 variable "cluster_name" {
   description = "The name of the Airflow cluster (e.g. airflow-xyz). This variable is used to namespace all resources created by this module."
   type        = string
@@ -132,16 +114,6 @@ variable "cluster_name" {
 variable "cluster_version" {
   default     = "1.20"
   description = "Cluster version"
-}
-
-variable "vpc_id" {
-  type        = string
-  description = "VPC where the cluster and workers will be deployed."
-}
-
-variable "subnet" {
-  type        = string
-  description = "The private subnet to place the EKS cluster and workers within."
 }
 
 variable "instance_type_group1" {

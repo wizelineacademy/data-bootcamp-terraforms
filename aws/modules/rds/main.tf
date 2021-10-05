@@ -1,9 +1,7 @@
 # --- main.tf/modules/aws/rds
 resource "aws_db_subnet_group" "db_subnet" {
   name       = "rds-subnet"
-  subnet_ids = [
-    var.private_subnet]
-
+  subnet_ids = [var.subnet_rds]
   tags = {
     Name = "rds-db"
   }

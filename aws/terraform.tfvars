@@ -3,9 +3,15 @@ region = "us-east-2"
 #### Networking variables ####
 vpc_cidr = "10.0.0.0/16"
 
-public_subnets_cidr = "10.0.1.0/24"
+public_subnets_cidr = "10.0.0.0/24"
 
-private_subnets_cidr = "10.0.2.0/24"
+private_subnets_cidr = [
+    "10.0.1.0/24",
+    "10.0.2.0/24"]
+
+availability_zone = [ 
+    "us-east-2a",
+    "us-east-2b"]
 
 #### EKS variables ####
 cluster_name = "airflow-eks-data-bootcamp"
@@ -33,11 +39,11 @@ ec2_instance_type = "t2.micro" # Free Tier eligible
 
 ec2_ssh_key_name = "bastion-host-key"
 
-ec2_ssh_public_key_path = "insert your path"
+ec2_ssh_public_key_path = "./bastion-host-key"
 
 
 #### RDS ####
-allocated_storage = ""
+allocated_storage = 256
 
 db_engine = ""
 
@@ -51,8 +57,12 @@ db_username = ""
 
 db_password = ""
 
+service_sg = ""
+
+publicly_accessible = false
+
 #### S3 variables ####
-buckebucket_prefix = "s3-Data-bootcamp-"
+bucket_prefix = "s3-Data-bootcamp-"
 
 acl = "private"
 
