@@ -14,8 +14,13 @@ variable "public_subnets_cidr" {
 }
 
 variable "private_subnets_cidr" {
-  type        = string
+  type        = list(string)
   description = "IP Ranges for the Private Subnet"
+}
+
+variable "availability_zone" {
+  type = list(string)
+  description = "AZ for Private Subnets"
 }
 
 ### RDS ###
@@ -110,8 +115,6 @@ variable "cluster_version" {
   default     = "1.20"
   description = "Cluster version"
 }
-
-
 
 variable "instance_type_group1" {
   default     = "t2.small"
