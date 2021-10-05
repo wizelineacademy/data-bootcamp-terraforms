@@ -1,6 +1,7 @@
 # --- variables.tf/gcp/modules/vpc
 
 variable "project_id" {}
+/*
 variable "vpc_name" {
   description = "Name for the VPC"
   type        = string
@@ -8,14 +9,22 @@ variable "vpc_name" {
 variable "cidr_range" {
   description = "CIDR range to create the subnets"
   type        = number
-}
-variable "subnet_name" {
+}*/
+variable "private_subnet_name" {
   description = "Subnet name"
-  type        = string
+  type        = list(string)
+  default     = [
+    "private-0",
+    "private-1",
+    "private-2"]
 }
 variable "public_subnet_name" {
   description = "Subnet name"
-  type        = string
+  type        = list(string)
+  default     = [
+    "public-0",
+    "public-1",
+    "public-2"]
 }
 
 variable "private_subnets" {
