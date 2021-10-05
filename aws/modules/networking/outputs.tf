@@ -19,7 +19,7 @@ output "private_subnets_route_table_id" {
 }
 
 output "private_subnets_ids" {
-  value = aws_subnet.private_subnet.id
+  value = aws_subnet.private_subnet.*.id
 }
 
 output "nat_gw_ids" {
@@ -28,4 +28,8 @@ output "nat_gw_ids" {
 
 output "internet_gateway_id" {
   value = aws_internet_gateway.igw.id
+}
+
+output "availability_zone" {
+  value = var.availability_zone
 }
