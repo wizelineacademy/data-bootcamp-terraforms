@@ -38,22 +38,22 @@ module "eks" {
 #   ec2_instance_type              = var.ec2_instance_type
 # }
 
-# module "rds" {
-#   source = "./modules/rds"
+module "rds" {
+  source = "./modules/rds"
 
-#   vpc_id_rds        = module.networking.vpc_id
-#   subnet_rds        = module.networking.private_subnets_ids
+  vpc_id_rds        = module.networking.vpc_id
+  subnets_rds        = module.networking.private_subnets_ids
 
-#   allocated_storage   = var.allocated_storage
-#   db_engine           = var.db_engine
-#   engine_version      = var.engine_version
-#   instance_type       = var.instance_type
-#   database_name       = var.database_name
-#   db_username         = var.db_username
-#   db_password         = var.db_password
-#   service_sg          = var.service_sg
-#   publicly_accessible = var.publicly_accessible
-# }
+  allocated_storage   = var.allocated_storage
+  db_engine           = var.db_engine
+  db_port             = var.db_port
+  engine_version      = var.engine_version
+  instance_type       = var.instance_type
+  database_name       = var.database_name
+  db_username         = var.db_username
+  db_password         = var.db_password
+  publicly_accessible = var.publicly_accessible
+}
 
 # module "s3" {
 #   source = "./modules/s3"

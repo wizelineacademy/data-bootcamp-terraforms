@@ -30,6 +30,9 @@ variable "allocated_storage" {
 variable "db_engine" {
   description = "Database instance type"
 }
+variable "db_port"{
+  description = "Database port"
+}
 variable "engine_version" {
   description = "Engine version"
 }
@@ -44,9 +47,6 @@ variable "db_username" {
 }
 variable "db_password" {
   description = "Password credentials for root user"
-}
-variable "service_sg" {
-  description = "Security group of the service which is going to connect to the database"
 }
 variable "publicly_accessible" {
   description = "Variable that set the instance to be accessible publicly"

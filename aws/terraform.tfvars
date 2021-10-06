@@ -45,21 +45,21 @@ ec2_instance_type = "t2.micro" # Free Tier eligible
 
 
 #### RDS ####
-allocated_storage = 256
+allocated_storage = 20
 
-db_engine = ""
+db_engine = "postgres"
 
-engine_version = ""
+db_port = 5432
 
-instance_type = ""
+engine_version = "12.8"
 
-database_name = ""
+instance_type = "db.t2.micro"
 
-db_username = ""
+database_name = "dbname"
 
-db_password = ""
+db_username = "dbuser"
 
-service_sg = ""
+db_password = "dbpassword"
 
 publicly_accessible = false
 
