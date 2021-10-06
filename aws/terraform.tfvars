@@ -27,6 +27,8 @@ asg_desired_capacity_group1 = 2
 asg_desired_capacity_group2 = 1
 
 #### EC2 variables ####
+number_of_instances = 5
+
 ec2_name = "Bastion Host"
 
 ec2_security_group_name = "Bastion Host SG"
@@ -37,9 +39,9 @@ ec2_ami = "ami-00dfe2c7ce89a450b" # Amazon Linux 2 AMI (64-bit x86)  Free Tier e
 
 ec2_instance_type = "t2.micro" # Free Tier eligible
 
-ec2_ssh_key_name = "bastion-host-key"
+# ec2_ssh_key_name = "bastion-host-key"
 
-ec2_ssh_public_key_path = "./bastion-host-key"
+# ec2_ssh_public_key_path = "./bastion-host-key"
 
 
 #### RDS ####

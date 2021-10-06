@@ -23,19 +23,19 @@ module "eks" {
   asg_desired_capacity_group1 = var.asg_desired_capacity_group1
   asg_desired_capacity_group2 = var.asg_desired_capacity_group2
 }
+
 # module "ec2" {
 #   source = "./modules/ec2"
 
 #   vpc_id_ec2                     = module.networking.vpc_id
 #   subnet_id                      = module.networking.public_subnets_ids
-
+  
+#   number_of_instances            = var.number_of_instances
 #   ec2_name                       = var.ec2_name
 #   ec2_security_group_name        = var.ec2_security_group_name
 #   ec2_security_group_description = var.ec2_security_group_description
 #   ec2_ami                        = var.ec2_ami
 #   ec2_instance_type              = var.ec2_instance_type
-#   ec2_ssh_key_name               = var.ec2_ssh_key_name
-#   ec2_ssh_public_key_path        = var.ec2_ssh_public_key_path
 # }
 
 # module "rds" {
