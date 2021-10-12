@@ -3,8 +3,8 @@ variable "project_id" {}
 variable "cluster_name"{
   type = string
 }
-variable "region" {
-  description = "region"
+variable "location" {
+  description = "location"
 }
 
 variable "vpc_id" {
