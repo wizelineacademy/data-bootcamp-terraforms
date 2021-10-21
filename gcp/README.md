@@ -6,7 +6,7 @@ The current architecture was implemented following this guide [Provision a GKE C
 ### Prerequisites
 
 - GCP account configured. 
-- Helm 3
+- Kubectl cli
 
 #### Dependencies
 - gcloud cli
@@ -28,7 +28,7 @@ terraform apply --var-file=terraform.tfvars
 Once that the cluster is created, set the kubectl context:
 
 ```
-gcloud container clusters get-credentials $(terraform output -raw kubernetes_cluster_name) --region $(terraform output -raw region)
+gcloud container clusters get-credentials $(terraform output -raw kubernetes_cluster_name) --region $(terraform output -raw location)
 ```
 
 To destroy the EKS cluster, we run:
@@ -36,50 +36,23 @@ To destroy the EKS cluster, we run:
 ```
 terraform destroy --var-file=terraform.tfvars
 ```
+### Airflow
+To work with Airflow we will use a NFS service, we will created on the cluster.
 
-
-## For Helm 
-
-Here we are using official Airflow helm chart as example, but, can also been installed any other Airflow distribution.
-
-Create the namespace
+Create a namespace for the nsf service
 ```
-kubectl create namespace airflow
+kubectl create namespace nfs
 ```
-
-Add the chart repository and confirm:
+Now is time to create the nfs server 
 ```
-helm repo add apache-airflow https://airflow.apache.org
+kubectl -n nfs apply -f nfs/nfs-server.yaml 
 ```
-Install the airflow chart from the repository:
+export the nfs server.
 ```
-helm install airflow apache-airflow/airflow --namespace airflow
-```
-We can verify that our pods are up and running by executing:
-```
-kubectl get pods -n airflow
+export NFS_SERVER=$(kubectl -n nfs get service/nfs-server -o jsonpath="{.spec.clusterIP}") 
 ```
 
-### Accessing to Airflow dashboard
-
-The Helm chart shows how to connect:
-```
-You can now access your dashboard(s) by executing the following command(s) and visiting the corresponding port at localhost in your browser:
-
-Airflow Webserver:     kubectl port-forward svc/airflow-webserver 8080:8080 --namespace airflow
-Flower dashboard:      kubectl port-forward svc/airflow-flower 5555:5555 --namespace airflow
-Default Webserver (Airflow UI) Login credentials:
-    username: admin
-    password: admin
-Default Postgres connection credentials:
-    username: postgres
-    password: postgres
-    port: 5432
-
-You can get Fernet Key value by running the following:
-
-    echo Fernet Key: $(kubectl get secret --namespace airflow airflow-fernet-key -o jsonpath="{.data.fernet-key}" | base64 --decode)
-```
+To install airflow go to the directory `kubernetes/`. [Install Airflow](../kubernetes/README.md)
 
 ## Acknowledgments
 

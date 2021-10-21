@@ -36,7 +36,7 @@ To destroy the EKS cluster, we run:
 terraform destroy --var-file=terraform.tfvars
 ```
 ### Airflow
-export de DNS name for the nfs server.
+export the nfs server.
 ```
 export NFS_SERVER=$(terraform output -raw efs)
 ```
