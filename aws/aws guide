@@ -1,0 +1,94 @@
+0. Set region us-east-2 AWS CONSOLE(Ohio)
+1. Install AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-prereqs.html
+
+1.1 Sign up to AWS
+1.2 Create an IAM user account from root account (Admon) https://docs.aws.amazon.com/es_es/IAM/latest/UserGuide/getting-started_create-admin-group.html 
+1.3 Create an access key ID and secret access key
+1.4 Credentials saved in: "/Users/juandavidescobarescobar/Documents/Wizeline/ApprenticeShip DE 2022-01/data-bootcamp-terraforms-master/resources apprentice-ship/rootkey.csv"
+
+2. Install AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
+2.1 path: /usr/local/aws-cli
+
+3. Add instalation in the OS Path: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-path.html
+
+3.1. aws configure set default.region us-east-2
+4. Setup AWS CLI: https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html
+    aws configure
+    AWS Access Key ID [None]: AKIAXBJ3ORG37ETZFZUG
+    AWS Secret Access Key [None]: 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
+    Default region name [None]: us-east-2
+    Default output format [None]: json
+
+5. Terraform guide: data-bootcamp-terraforms/aws/READ.md: https://github.com/wizelineacademy/data-bootcamp-terraforms/tree/master/aws
+5.1 Intall terrafom:  brew install terraform@0.13, tfenv install (https://www.youtube.com/watch?v=5eGaNJFdJIQ)
+5.2 terraform init
+5.3 terraform apply --var-file=terraform.tfvars
+5.4 Once that the cluster is created, set the kubectl context: aws eks --region $(terraform output -raw region) update-kubeconfig --name $(terraform output -raw cluster_name)
+
+6. export the nfs server: export NFS_SERVER=$(terraform output -raw efs)
+6.1 To install airflow go to the directory kubernetes/  (https://github.com/wizelineacademy/data-bootcamp-terraforms/blob/master/kubernetes/README.md)
+/Users/juandavidescobarescobar/.kube/config
+6.2 install Helm 3: brew install helm
+6.2 Install kubectl cli aws
+
+7. verify that our pods are up and running by executing:
+   kubectl get pods -n airflow
+7.1 change RDS-Database to accessible = public to connect remote from local client 
+
+-aws rds modify-db-instance \
+    --db-instance-identifier terraform-2021122119211505640000000f \
+    --publicly-accessible 
+    or https://aws.amazon.com/es/premiumsupport/knowledge-center/rds-connectivity-instance-subnet-vpc/
+
+-y modificar regals de entrada y salida com PostgresSQL, puerto y miIp: https://www.youtube.com/watch?v=Umjiou3lY5I&t=588s
+
+-Reiniciar BD
+
+-En caso de que no funcione, crear regla de entrada para All trafic
+
+8. Accessing to Airflow dashboard (The Helm chart shows how to connect):
+8.1 kubectl port-forward svc/airflow-webserver 8080:8080 --namespace airflow
+
+You can now access your dashboard(s) by executing the following command(s) and visiting the corresponding port at localhost in your browser:
+
+Airflow Webserver:     kubectl port-forward svc/airflow-webserver 8080:8080 --namespace airflow
+Flower dashboard:      kubectl port-forward svc/airflow-flower 5555:5555 --namespace airflow
+Default Webserver (Airflow UI) Login credentials:
+    username: admin
+    password: admin
+Default Postgres connection credentials:
+    username: postgres
+    password: postgres
+    port: 5432
+    host: terraform-2021122119211505640000000f.c5h5k3gmpbet.us-east-2.rds.amazonaws.com
+
+You can get Fernet Key value by running the following:
+
+    echo Fernet Key: $(kubectl get secret --namespace airflow airflow-fernet-key -o jsonpath="{.data.fernet-key}" | base64 --decode)
+
+7. terraform destroy --var-file=terraform.tfvars
+
+8. AirflowTemplate: https://github.com/juadaves91/Airflow-Templates
+
+git config --global user.name "juadaves91"
+git config --global user.email "juadaves.1991@gmail.com"
+
+change credentials:
+brew install gh
+gh auth login
+
+-token github: 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
+-user: juadaves91
+
+
+
+helm install airflow -f airflow-values.yaml apache-airflow/airflow --namespace airflow
+
+AIRFLOW_VERSION=2.2.1
+PYTHON_VERSION="$(python --version | cut -d " " -f 2 | cut -d "." -f 1-2)"
+CONSTRAINT_URL="https://raw.githubusercontent.com/apache/airflow/constraints-${AIRFLOW_VERSION}/constraints-${PYTHON_VERSION}.txt"
+pip install "apache-airflow[async,postgres,amazon]==${AIRFLOW_VERSION}" --constraint "${CONSTRAINT_URL}"
+
+
+pip install apache-airflow[amazon]==2.0.1 \
+  --constraint "https://raw.githubusercontent.com/apache/airflow/constraints-2.0.2/constraints-3.6.txt"
