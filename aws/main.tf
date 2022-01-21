@@ -11,7 +11,7 @@ module "networking" {
 
 module "eks" {
   source = "./modules/eks"
-  version   = "17.24.0"	
+  #version   = "17.24.0"	
   vpc_id_eks = module.networking.vpc_id
   subnet = module.networking.private_subnets_ids
 
