@@ -1,4 +1,4 @@
-region = "us-east-2"
+region = "us-east-1"
 
 #### Networking variables ####
 vpc_cidr = "10.0.0.0/16"
